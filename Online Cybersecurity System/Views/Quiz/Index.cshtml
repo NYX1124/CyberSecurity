@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Quiz>
+@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manage Quiz</h2>
+
+<p>@Model.Count() record(s)</p>
+
+@*<p>
+        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#quizModal">New Question</a>
+    </p>
+
+    <div class="modal fade" id="quizModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Add New Question</h2>
+                    <div class="modal-body">
+                        <form id="quizform">
+                            <label>Question</label>
+                            @Html.TextBoxFor(q => q.description, new { @class = "form-control" })
+                            <label>Choice A</label>
+                            @Html.TextBoxFor(q => q.choiceA, new { @class = "form-control" })
+                            <label>Choice B</label>
+                            @Html.TextBoxFor(q => q.choiceB, new { @class = "form-control" })
+                            <label>Choice C</label>
+                            @Html.TextBoxFor(q => q.choiceC, new { @class = "form-control" })
+                            <label>Choice D</label>
+                            @Html.TextBoxFor(q => q.choiceD, new { @class = "form-control" })
+                            <label>Correct Answer</label>
+                            @Html.TextBoxFor(q => q.correct_answer, new { @class = "form-control" })
+                            <label>Quiz Status</label>
+                            @Html.TextBoxFor(q => q.quizStatus, new { @class = "form-control" })
+                            <label>Create Date</label>
+                            @Html.TextBoxFor(q => q.createDate, new { @class = "form-control" })
+                        </form>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>*@
+<a href="InsertQuiz"><button class="btn btn-success btn-lg ms-2">+ New</button></a>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Question</th>
+        <th>Level</th>
+        <th>Choice A</th>
+        <th>Choice B</th>
+        <th>Choice C</th>
+        <th>Choice D</th>
+        <th>Correct Answer</th>
+        <th>Quiz Status</th>
+        <th>Created Date</th>
+        <th>Category Name</th>
+        <th></th>
+    </tr>
+    @foreach (var q in Model)
+    {
+        <tr>
+            <td>@q.id</td>
+            <td>@q.description</td>
+            <td>@q.difficulty</td>
+            <td>@q.choiceA</td>
+            <td>@q.choiceB</td>
+            <td>@q.choiceC</td>
+            <td>@q.choiceD</td>
+            <td>@q.correct_answer</td>
+            <td>@q.quizStatus</td>
+            <td>@q.createDate </td>
+            <td>@q.Category.Name</td>
+            <td>
+                @*<a href="Detail/@q.quizId"><button>Detail</button></a>*@
+                <a href="/Quiz/UpdateQuiz/@q.id"><button>Update</button></a>
+                <a href="/Quiz/Delete/@q.id"><button>Delete</button></a>
+            </td>
+        </tr>
+    }
+</table>

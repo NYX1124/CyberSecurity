@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Both";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>Only [Authenticated] users can see this page.</p>
+
+<form method="post">
+    @* TODO(1): Handle 2 submit buttons *@
+    @* TODO(2): [Admin] and [Member] only buttons *@
+
+    @if (User.IsInRole("Admin"))
+    {
+        <button name="action" value="btnAdmin">Admin</button>
+    }
+    @if (User.IsInRole("Employee"))
+    {
+        <button name="action" value="btnEmployee">Employee</button>
+    }
+</form>

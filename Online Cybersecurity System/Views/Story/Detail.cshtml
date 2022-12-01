@@ -1,0 +1,47 @@
+﻿@model Online_Cybersecurity_System.Models.Story
+
+
+@{
+     ViewBag.Title = "Detail";
+     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Story Detail</h2>
+
+<table class="table detail">
+     <tr>
+          <th>Story Id</th>
+          <td>@Model.id</td>
+     </tr>
+     <tr>
+          <th>Story Name</th>
+          <td>@Model.name</td>
+     </tr>
+     <tr>
+          <th>Story Description</th>
+          <td>@Model.description</td>
+     </tr>
+     <tr>
+          <th>Quiz Status</th>
+          <td>@Model.storyStatus</td>
+     </tr>
+     <tr>
+          <th>Created Date</th>
+          <td>@Model.createDate</td>
+     </tr>
+     <tr>
+          <th>Source</th>
+          <td>@Model.src</td>
+     </tr>
+     <tr>
+          <th>Player</th>
+          <td>
+               <div style="padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden; max-width: 100%;">
+                    <iframe src="@Model.src" frameborder="0" scrolling="no" allowfullscreen allow="autoplay; fullscreen; clipboard-read; clipboard-write; encrypted-media; geolocation; microphone" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+               </div>
+          </td>
+     </tr>
+</table>
+
+<p>
+     <button class="btn btn-warning btn-lg ms-2" onclick="history.go(-1); return false;">Back</button>
+</p>

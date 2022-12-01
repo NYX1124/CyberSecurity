@@ -1,0 +1,55 @@
+﻿@model Online_Cybersecurity_System.Models.Category
+
+@{
+    ViewBag.Title = "Insert Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form method="post" class="form-horizontal" enctype="multipart/form-data">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="row register-form">
+                            @Html.ValidationSummary(true)
+                            <div class="col-md-12">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(c => c.CategoryName, new { @class = "control-label col-sm-4" })
+                                        @Html.TextBoxFor(c => c.CategoryName, new { data_upper = "" })
+                                        @Html.ValidationMessageFor(c => c.CategoryName)
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end pt-3">
+                                    <button type="reset" class="btn btn-light btn-lg">Reset all</button>
+                                    <button class="btn btn-warning btn-lg ms-2">Insert</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    @foreach (var c in ViewData["list"] as List<Online_Cybersecurity_System.Models.Category>)
+    {
+        <tr>
+            <td>@c.CategoryId</td>
+            <td>@c.CategoryName</td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateCategory", "ManageQuiz", new { id = c.CategoryId }, null)
+                <a href="/ManageQuiz/UpdateCategory/@c.CategoryId"><button>Update </button></a>
+                <a href="/ManageQuiz/DeleteCategory/@c.CategoryId"><button>Delete</button></a>
+            </td>
+        </tr>
+    }
+</table>

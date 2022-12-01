@@ -1,0 +1,66 @@
+﻿@model Online_Cybersecurity_System.Models.AchievementBadge
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<h4>Achievement Badge</h4>
+
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="row register-form">
+                            @Html.ValidationSummary(true)
+                            <div class="col-md-12">
+                                <div class="col-sm-12">
+                                    <div class="form-group  mb-4">
+                                        @Html.LabelFor(a => a.id, new { @class = "control-label col-sm-4" })
+                                        @Html.DisplayFor(a => a.id, new { data_upper = "" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(a => a.achievementTitle, new { @class = "control-label col-sm-4" })
+                                        @Html.DisplayFor(a => a.achievementTitle, new { data_upper = "" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(a => a.achievementDescription, new { @class = "control-label col-sm-4" })
+                                        @Html.DisplayFor(a => a.achievementDescription, new { data_upper = "" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(a => a.achievementStatus, new { @class = "control-label col-sm-4" })
+                                        @Html.DisplayFor(a => a.achievementStatus, new { data_upper = "" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(a => a.createDate, new { @class = "control-label col-sm-4" })
+                                        @Html.DisplayFor(a => a.createDate, new { data_upper = "", @Value = DateTime.Now.ToShortDateString() })
+                                    </div>
+                                </div>
+                                @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+                                    <div class="d-flex justify-content-end pt-3">
+                                    <button class="btn btn-warning btn-lg ms-2">Back</button>
+                                    <button type = "reset" class="btn btn-light btn-lg">Reset all</button>
+                                    <input type = "submit" value= "Delete" class="btn btn-default" />
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

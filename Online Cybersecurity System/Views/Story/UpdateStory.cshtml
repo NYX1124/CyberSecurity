@@ -1,0 +1,73 @@
+﻿@model Online_Cybersecurity_System.Models.Story
+
+@{
+     ViewBag.Title = "UpdateStory";
+     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" class="form-horizontal">
+     <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+               <div class="col">
+                    <div class="card card-registration my-4">
+                         <div class="row g-0">
+                              <div class="row register-form">
+                                   @Html.ValidationSummary(true)
+                                   <div class="col-md-12">
+                                        <div class="col-sm-12">
+                                             <div class="form-group  mb-4">
+                                                  @Html.LabelFor(s => s.id, new { @class = "control-label col-sm-4" })
+                                                  @Html.DisplayFor(s => s.id, new { data_upper = "" })
+                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                             <div class="form-group">
+                                                  @Html.LabelFor(s => s.name, new { @class = "control-label col-sm-4" })
+                                                  @Html.EditorFor(s => s.name, new { data_upper = "" })
+                                                  @Html.ValidationMessageFor(s => s.description)
+                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                             <div class="form-group">
+                                                  @Html.LabelFor(s => s.description, new { @class = "control-label col-sm-4" })
+                                                  @Html.EditorFor(s => s.description, new { data_upper = "" })
+                                                  @Html.ValidationMessageFor(s => s.description)
+                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                             <div class="form-group">
+                                                  @Html.LabelFor(s => s.src, new { @class = "control-label col-sm-4" })
+                                                  @Html.EditorFor(s => s.src, new { data_upper = "" })
+                                                  @Html.ValidationMessageFor(s => s.src)
+                                             </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                             <div class="form-group">
+                                                  @Html.LabelFor(s => s.storyStatus, new { @class = "control-label col-sm-4" })
+                                                  <label>@Html.RadioButtonFor(s => s.storyStatus, "Active") Active</label>
+                                                  <label>@Html.RadioButtonFor(s => s.storyStatus, "Inactive") Inactive</label>
+                                                  @Html.ValidationMessageFor(s => s.storyStatus)
+                                             </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                             <div class="form-group">
+                                                  @Html.LabelFor(s => s.createDate, new { @class = "control-label col-sm-4" })
+                                                  @Html.EditorFor(s => s.createDate, new { data_upper = "", @Value = DateTime.Now.ToShortDateString() })
+                                                  @Html.ValidationMessageFor(s => s.createDate)
+                                             </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end pt-3">
+                                             <section>
+                                                  <button class="btn btn-warning btn-lg ms-2" onclick="history.go(-1); return false;">Back</button>
+                                                  <button type="reset" class="btn btn-light btn-lg">Reset all</button>
+                                                  <input type="submit" value="Update" class="btn btn-default" />
+                                             </section>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+</form>

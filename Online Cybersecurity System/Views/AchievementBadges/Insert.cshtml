@@ -1,0 +1,66 @@
+﻿@model AchievementBadgeVM
+
+@{
+    ViewBag.Title = "Insert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3><strong>@TempData["Message"]</strong></h3>
+
+<form method="post" class="form-horizontal" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="row register-form">
+                            @Html.ValidationSummary(true)
+                            <div class="col-md-12">
+                                <div class="col-sm-12">
+                                    <div class="form-group  mb-4">
+                                        @Html.LabelFor(a => a.id, new { @class = "control-label col-sm-4" })
+                                        @Html.DisplayFor(a => a.id, new { data_upper = "" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(a => a.achievementTitle, new { @class = "control-label col-sm-4" })
+                                        @Html.TextAreaFor(a => a.achievementTitle, new { data_upper = "" })
+                                        @Html.ValidationMessageFor(a => a.achievementTitle)
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(a => a.achievementDescription, new { @class = "control-label col-sm-4" })
+                                        @Html.TextAreaFor(a => a.achievementDescription, new { data_upper = "" })
+                                        @Html.ValidationMessageFor(a => a.achievementDescription)
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(a => a.achievementStatus, new { @class = "control-label col-sm-4" })
+                                        <label>@Html.RadioButtonFor(a => a.achievementStatus, "Active") Active</label>
+                                        <label>@Html.RadioButtonFor(a => a.achievementStatus, "Inactive") Inactive</label>
+                                        @Html.ValidationMessageFor(a => a.achievementStatus)
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(a => a.createDate, new { @class = "control-label col-sm-4" })
+                                        @Html.TextBoxFor(a => a.createDate, new { data_upper = "", @Value = DateTime.Now.ToShortDateString() })
+                                        @Html.ValidationMessageFor(a => a.createDate)
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end pt-3">
+                                    <button class="btn btn-warning btn-lg ms-2">Back</button>
+                                    <button type="reset" class="btn btn-light btn-lg">Reset all</button>
+                                    <button class="btn btn-warning btn-lg ms-2">Insert</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

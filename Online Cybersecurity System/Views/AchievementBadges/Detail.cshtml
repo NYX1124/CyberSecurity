@@ -1,0 +1,34 @@
+﻿@model AchievementBadgeVM
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detail</h2>
+
+<table class="table detail">
+    <tr>
+        <th>Achievement Id</th>
+        <td>@Model.id</td>
+    </tr>
+    <tr>
+        <th>Achievement Title</th>
+        <td>@Model.achievementTitle</td>
+    </tr>
+    <tr>
+        <th>Achievement Description</th>
+        <td>@Model.achievementDescription</td>
+    </tr>
+    <tr>
+        <th>Achievement Status</th>
+        <td>@Model.achievementStatus</td>
+    </tr>
+    <tr>
+        <th>Created Date</th>
+        <td>@Model.createDate</td>
+    </tr>
+</table>
+
+<p>
+    <button data-get="/">Index</button>
+</p>

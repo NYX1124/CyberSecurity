@@ -1,0 +1,53 @@
+﻿@model Online_Cybersecurity_System.Models.Category
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" class="form-horizontal" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="row register-form">
+                            @Html.ValidationSummary(true)
+                            <div class="col-md-12">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(c => c.Name, new { @class = "control-label col-sm-4" })
+                                        @Html.TextBoxFor(c => c.Name, new { data_upper = "" })
+                                        @Html.ValidationMessageFor(c => c.Name)
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end pt-3">
+                                    <button type="reset" class="btn btn-light btn-lg">Reset all</button>
+                                    <button class="btn btn-warning btn-lg ms-2">Insert</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    @foreach (var c in ViewData["list"] as List<Online_Cybersecurity_System.Models.Category>)
+    {
+        <tr>
+            <td>@c.Id</td>
+            <td>@c.Name</td>
+            <td>
+                <a href="/Quiz/DetailCategory/@c.Id"><button>Detail</button></a>
+                <a href="/Quiz/UpdateCategory/@c.Id"><button>Update</button></a>
+                <a href="/Quiz/DeleteCategory/@c.id"><button>Delete</button></a>
+            </td>
+        </tr>
+    }
+</table>

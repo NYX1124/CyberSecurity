@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ebca098c66f43979178e634f0c72e9a" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="CybersecurityModel.Quiz" Width="1.5" PointX="6.375" PointY="6.75" />
+        <EntityTypeShape EntityType="CybersecurityModel.Story" Width="1.5" PointX="6.75" PointY="4.125" />
+        <EntityTypeShape EntityType="CybersecurityModel.Answer" Width="1.5" PointX="7.125" PointY="16" />
+        <EntityTypeShape EntityType="CybersecurityModel.Choice" Width="1.5" PointX="7.375" PointY="13.875" />
+        <EntityTypeShape EntityType="CybersecurityModel.Question" Width="1.5" PointX="4.875" PointY="14.125" />
+        <AssociationConnector Association="CybersecurityModel.FK_Answers_ToQuestions" />
+        <AssociationConnector Association="CybersecurityModel.FK_Choices_ToQuestions" />
+        <EntityTypeShape EntityType="CybersecurityModel.Category" Width="1.5" PointX="2.75" PointY="8.625" />
+        <AssociationConnector Association="CybersecurityModel.FK_Questions_ToCategory" />
+        <AssociationConnector Association="CybersecurityModel.FK_Quiz_ToCategory" />
+        <EntityTypeShape EntityType="CybersecurityModel.AchievementBadge" Width="1.5" PointX="3.625" PointY="5.875" />
+        <EntityTypeShape EntityType="CybersecurityModel.Admin" Width="1.5" PointX="13.625" PointY="8.125" />
+        <EntityTypeShape EntityType="CybersecurityModel.Employee" Width="1.5" PointX="8.875" PointY="10.25" />
+        <EntityTypeShape EntityType="CybersecurityModel.Score" Width="1.5" PointX="5" PointY="10.75" />
+        <AssociationConnector Association="CybersecurityModel.FK_Score_ToCategory" />
+        <AssociationConnector Association="CybersecurityModel.FK_Score_ToEmployee" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

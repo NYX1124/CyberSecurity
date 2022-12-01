@@ -1,0 +1,295 @@
+﻿@model RegisterVM
+@{
+    ViewBag.Title = "Account : Register";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<form method="post" class="form" enctype="multipart/form-data">
+    <section class="h-100 bg-dark">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                    <div class="card card-registration my-4">
+                        <div class="row g-0">
+                            <div class="col-xl-6 d-none d-xl-block">
+                                @*<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                    alt="Sample photo" class="img-fluid"
+                                    style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />*@
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="card-body p-md-5 text-black">
+                                    <h3 class="mb-5 text-uppercase">Registration form</h3>
+
+                                    @*<div class="row">
+                                            @Html.ValidationSummary(true)
+                                            <div class="form-outline">
+                                                @Html.LabelFor(r => r.Id)
+                                                @Html.TextBoxFor(r => r.Id, new { data_upper = "", autofocus = "", @id = "form3Example1n1", @class = "form-control form-control-lg" })
+                                            </div>
+                                        </div>*@
+
+                                    <div class="row">
+                                        <div class="form-outline mb-4">
+                                            @Html.LabelFor(r => r.Username, new { @class = "form-label" })
+                                            @Html.TextBoxFor(r => r.Username, new { data_upper = "", autofocus = "", @id = "form3Example1n1", @class = "form-control form-control-lg" })
+                                            @Html.ValidationMessageFor(r => r.Username)
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-outline mb-4">
+                                            @Html.LabelFor(r => r.Email, new { @class = "form-label" })
+                                            @Html.TextBoxFor(r => r.Email, new { data_upper = "", autofocus = "", @id = "form3Example1n1", @class = "form-control form-control-lg" })
+                                            @Html.ValidationMessageFor(r => r.Email)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        @Html.LabelFor(r => r.Password, new { @class = "form-label" })
+                                        @Html.PasswordFor(r => r.Password, new { data_upper = "", autofocus = "", @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(r => r.Password)
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        @Html.LabelFor(r => r.FullName, new { @class = "form-label" })
+                                        @Html.TextBoxFor(r => r.FullName, new { data_upper = "", autofocus = "", @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(r => r.FullName)
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        @Html.LabelFor(r => r.PhoneNumber, new { @class = "form-label" })
+                                        @Html.TextBoxFor(r => r.PhoneNumber, new { data_upper = "", autofocus = "", @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(r => r.PhoneNumber)
+                                    </div>
+
+                                    <div class="form-group">
+                                        @* TODO *@
+                                        <label>Photo</label>
+                                        <div>
+                                            <label class="upload">
+                                                <small>Please select photo...</small>
+                                                @Html.TextBoxFor(r => r.Image, new { type = "file", accept = "image/jpeg,image/png", hidden = "", @class = "form-control form-control-lg" })
+                                                <img src="~/Images/photo.jpg">
+                                            </label>
+                                        </div>
+                                        @Html.ValidationMessageFor(r => r.Image)
+                                    </div>
+
+                                    @*<div class="form-outline mb-4">
+                                        @Html.LabelFor(r => r.Status)
+                                        @Html.TextBoxFor(r => r.Status, new { @Value = "Pending", data_upper = "", autofocus = "", @readonly = "readonly", @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(r => r.Status)
+                                    </div>*@
+                                    <div class="form-outline mb-4">
+                                        @Html.LabelFor(r => r.RegisterDate)
+                                        @Html.TextBoxFor(r => r.RegisterDate, new { @Value = DateTime.Now.ToShortDateString(), data_upper = "", autofocus = "", @readonly = "readonly", @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(r => r.RegisterDate)
+                                    </div>
+
+                                    <p>Already have an account? <a href="/Account/Login">Login</a> here</p>
+
+                                    <div class="d-flex justify-content-end pt-3">
+                                        <button type="reset" class="btn btn-light btn-lg">Reset all</button>
+                                        <button class="btn btn-warning btn-lg ms-2">Register</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+         $(function () {
+            var msg = '@ViewData["result"]';
+            if (msg == '1')
+            {
+                alert("User Details Inserted Successfully");
+                window.location.href = "@Url.Action("Login", "Home")";
+             }
+         });
+
+        function validatePhoto(f) {
+            let reType = /^image\/(jpeg|png)$/i;
+            let reName = /^.+\.(jpg|jpeg|png)$/i;
+
+            return f &&
+                f.size <= 1 * 1024 * 1024 &&
+                reType.test(f.type) &&
+                reName.test(f.name);
+        }
+
+        let src = null;
+
+        $('.upload input').change(e => {
+            let f = e.target.files[0];
+            let img = $(e.target).siblings('img')[0];
+
+            if (!src) src = img.src;
+
+            if (validatePhoto(f)) {
+                img.src = URL.createObjectURL(f);
+            }
+            else {
+                img.src = src;
+                e.target.value = '';
+            }
+        });
+    </script>
+</form>
+
+@*<form method="post" class="form" enctype="multipart/form-data">
+    <div class="container register">
+        <h3 class="register-heading" style="color: black">Apply as an Admin</h3>
+        <div class="row register-form">
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                @Html.LabelFor(r => r.Id)
+                @Html.DisplayFor(r => r.Id, new { data_upper = "", autofocus = "" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(r => r.email)
+                @Html.TextBoxFor(r => r.email, new { data_upper = "", autofocus = "" })
+                @Html.ValidationMessageFor(r => r.email)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(r => r.Password)
+                @Html.PasswordFor(r => r.Password, new { data_upper = "", autofocus = "" })
+                @Html.ValidationMessageFor(r => r.Password)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(r => r.fullName)
+                @Html.TextBoxFor(r => r.fullName, new { data_upper = "", autofocus = "" })
+                @Html.ValidationMessageFor(r => r.fullName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(r => r.phoneNumber)
+                @Html.TextBoxFor(r => r.phoneNumber, new { data_upper = "", autofocus = "" })
+                @Html.ValidationMessageFor(r => r.phoneNumber)
+            </div>
+            <div class="form-group">*@
+@*TODO
+    <label>Photo</label>
+                <div>
+                    <label class="upload">
+                        <small>Select photo...</small>
+                        @Html.TextBoxFor(r => r.image, new { type = "file", accept = "image/jpeg,image/png", hidden = "" })
+                        <img src="~/Images/photo.jpg">
+                    </label>
+                </div>
+                @Html.ValidationMessageFor(r => r.image)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(r => r.status)
+                @Html.TextBoxFor(r => r.status, new { @Value = "Pending", data_upper = "", autofocus = "" })
+                @Html.ValidationMessageFor(r => r.status)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(r => r.registerDate)
+                @Html.TextBoxFor(r => r.registerDate, new { @Value = DateTime.Now.ToShortDateString(), data_upper = "", autofocus = "" })
+                @Html.ValidationMessageFor(r => r.registerDate)
+            </div>
+        </div>
+    </div>
+    <section>
+            <button>Register</button>
+            <button type="reset">Reset</button>
+        </section>*@
+@*<script type="text/javascript">
+             $(function () {
+                var msg = '@ViewData["result"]';
+                if (msg == '1')
+                {
+                    alert("User Details Inserted Successfully");
+                    window.location.href = "@Url.Action("AdminLogin", "Home")";
+                 }
+             });
+
+            function validatePhoto(f) {
+                let reType = /^image\/(jpeg|png)$/i;
+                let reName = /^.+\.(jpg|jpeg|png)$/i;
+
+                return f &&
+                    f.size <= 1 * 1024 * 1024 &&
+                    reType.test(f.type) &&
+                    reName.test(f.name);
+            }
+
+            let src = null;
+
+            $('.upload input').change(e => {
+                let f = e.target.files[0];
+                let img = $(e.target).siblings('img')[0];
+
+                if (!src) src = img.src;
+
+                if (validatePhoto(f)) {
+                    img.src = URL.createObjectURL(f);
+                }
+                else {
+                    img.src = src;
+                    e.target.value = '';
+                }
+            });
+    </script>
+        </form>*@
+
+
+@*<a href="https://front.codes/" class="logo" target="_blank">
+        <img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+    </a>
+
+    <div class="section">
+        <div class="container">
+            <div class="row full-height justify-content-center">
+                <div class="col-12 text-center align-self-center py-5">
+                    <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                        <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+                        <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+                        <label for="reg-log"></label>
+                        <div class="card-3d-wrap mx-auto">
+                            <div class="card-3d-wrapper">
+                                <div class="card-front">
+                                    <div class="center-wrap">
+                                        <div class="section text-center">
+                                            <h4 class="mb-4 pb-3">Log In</h4>
+                                            <div class="form-group">
+                                                <input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+                                                <i class="input-icon uil uil-at"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+                                            <a href="#" class="btn mt-4">submit</a>
+                                            <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="center-wrap">
+                                        <div class="section text-center">
+                                            <h4 class="mb-4 pb-3">Sign Up</h4>
+                                            <div class="form-group">
+                                                <input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+                                                <i class="input-icon uil uil-at"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+                                            <a href="#" class="btn mt-4">submit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CybersecurityModelStoreContainer" CdmEntityContainer="CybersecurityEntities">
+    <EntitySetMapping Name="Quizs">
+      <EntityTypeMapping TypeName="CybersecurityModel.Quiz">
+        <MappingFragment StoreEntitySet="Quiz">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="quizStatus" ColumnName="quizStatus" />
+          <ScalarProperty Name="correct_answer" ColumnName="correct_answer" />
+          <ScalarProperty Name="choiceD" ColumnName="choiceD" />
+          <ScalarProperty Name="choiceC" ColumnName="choiceC" />
+          <ScalarProperty Name="choiceB" ColumnName="choiceB" />
+          <ScalarProperty Name="choiceA" ColumnName="choiceA" />
+          <ScalarProperty Name="difficulty" ColumnName="difficulty" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Storys">
+      <EntityTypeMapping TypeName="CybersecurityModel.Story">
+        <MappingFragment StoreEntitySet="Storys">
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="storyStatus" ColumnName="storyStatus" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="src" ColumnName="src" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Answers">
+      <EntityTypeMapping TypeName="CybersecurityModel.Answer">
+        <MappingFragment StoreEntitySet="Answers">
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="AnswerText" ColumnName="AnswerText" />
+          <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Choices">
+      <EntityTypeMapping TypeName="CybersecurityModel.Choice">
+        <MappingFragment StoreEntitySet="Choices">
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="ChoiceText" ColumnName="ChoiceText" />
+          <ScalarProperty Name="ChoiceId" ColumnName="ChoiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questions">
+      <EntityTypeMapping TypeName="CybersecurityModel.Question">
+        <MappingFragment StoreEntitySet="Questions">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="CybersecurityModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AchievementBadges">
+      <EntityTypeMapping TypeName="CybersecurityModel.AchievementBadge">
+        <MappingFragment StoreEntitySet="AchievementBadge">
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="achievementStatus" ColumnName="achievementStatus" />
+          <ScalarProperty Name="achievementDescription" ColumnName="achievementDescription" />
+          <ScalarProperty Name="achievementTitle" ColumnName="achievementTitle" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="CybersecurityModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Hash" ColumnName="Hash" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="CybersecurityModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Hash" ColumnName="Hash" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Scores">
+      <EntityTypeMapping TypeName="CybersecurityModel.Score">
+        <MappingFragment StoreEntitySet="Score">
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="score1" ColumnName="score" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,82 @@
+﻿@model LoginVM
+@{
+    ViewBag.Title = "Account : Login";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<form class="form" method="post">
+    <section class="h-100 bg-dark">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                    <div class="card card-registration my-4">
+                        <div class="row g-0">
+                            <div class="col-xl-6 d-none d-xl-block">
+                                @*<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                    alt="Sample photo" class="img-fluid"
+                                    style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />*@
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="card-body p-md-5 text-black">
+                                    <h3 class="mb-5 text-uppercase">login form</h3>
+
+                                    <div class="row">
+                                        @Html.ValidationSummary(true)
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-outline mb-4">
+                                            @Html.LabelFor(r => r.Username, new { @class = "form-label" })
+                                            @Html.TextBoxFor(r => r.Username, new { data_upper = "", autofocus = "", @class = "form-control form-control-lg" })
+                                            @Html.ValidationMessageFor(r => r.Username)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        @Html.LabelFor(r => r.Password, new { @class = "form-label" })
+                                        @Html.PasswordFor(r => r.Password, new { data_upper = "", autofocus = "", @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(r => r.Password)
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label>
+                                            @Html.CheckBoxFor(r => r.RememberMe) Remember Me
+                                        </label>
+                                    </div>
+
+                                    <p>Do not have an account? <a href="/Account/AdminRegister">Register</a> here</p>
+
+                                    <div class="d-flex justify-content-end pt-3">
+                                        <button type="reset" class="btn btn-light btn-lg">Reset all</button>
+                                        <button class="btn btn-warning btn-lg ms-2">Login</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+@*<br>
+        <div>
+            <label>
+                @Html.CheckBoxFor(r => r.RememberMe)Remember Me
+            </label>
+        </div>
+        <br>
+
+        <section>
+            <button>Login</button>
+            <button type="reset">Reset</button>
+        </section>
+    </form>
+
+    <p>
+        [
+        <a href="/Account/Register">Register</a> |
+        <a href="/Account/Reset">Reset Password</a>
+        ]
+    </p>*@
+

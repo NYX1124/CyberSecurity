@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CybersecurityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CybersecurityEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Quizs" EntityType="CybersecurityModel.Quiz" />
+    <EntitySet Name="Storys" EntityType="CybersecurityModel.Story" />
+    <EntitySet Name="Answers" EntityType="CybersecurityModel.Answer" />
+    <EntitySet Name="Choices" EntityType="CybersecurityModel.Choice" />
+    <EntitySet Name="Questions" EntityType="CybersecurityModel.Question" />
+    <AssociationSet Name="FK_Answers_ToQuestions" Association="CybersecurityModel.FK_Answers_ToQuestions">
+      <End Role="Question" EntitySet="Questions" />
+      <End Role="Answer" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Choices_ToQuestions" Association="CybersecurityModel.FK_Choices_ToQuestions">
+      <End Role="Question" EntitySet="Questions" />
+      <End Role="Choice" EntitySet="Choices" />
+    </AssociationSet>
+    <EntitySet Name="Categories" EntityType="CybersecurityModel.Category" />
+    <AssociationSet Name="FK_Questions_ToCategory" Association="CybersecurityModel.FK_Questions_ToCategory">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quiz_ToCategory" Association="CybersecurityModel.FK_Quiz_ToCategory">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Quiz" EntitySet="Quizs" />
+    </AssociationSet>
+    <EntitySet Name="AchievementBadges" EntityType="CybersecurityModel.AchievementBadge" />
+    <EntitySet Name="Admins" EntityType="CybersecurityModel.Admin" />
+    <EntitySet Name="Employees" EntityType="CybersecurityModel.Employee" />
+    <EntitySet Name="Scores" EntityType="CybersecurityModel.Score" />
+    <AssociationSet Name="FK_Score_ToCategory" Association="CybersecurityModel.FK_Score_ToCategory">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Score" EntitySet="Scores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Score_ToEmployee" Association="CybersecurityModel.FK_Score_ToEmployee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Score" EntitySet="Scores" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Quiz">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="difficulty" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="choiceA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="choiceB" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="choiceC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="choiceD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="correct_answer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="quizStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="CybersecurityModel.FK_Quiz_ToCategory" FromRole="Quiz" ToRole="Category" />
+  </EntityType>
+  <EntityType Name="Story">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="src" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="storyStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="AnswerId" />
+    </Key>
+    <Property Name="AnswerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AnswerText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Question" Relationship="CybersecurityModel.FK_Answers_ToQuestions" FromRole="Answer" ToRole="Question" />
+  </EntityType>
+  <EntityType Name="Choice">
+    <Key>
+      <PropertyRef Name="ChoiceId" />
+    </Key>
+    <Property Name="ChoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ChoiceText" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Question" Relationship="CybersecurityModel.FK_Choices_ToQuestions" FromRole="Choice" ToRole="Question" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="QuestionId" />
+    </Key>
+    <Property Name="QuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Answers" Relationship="CybersecurityModel.FK_Answers_ToQuestions" FromRole="Question" ToRole="Answer" />
+    <NavigationProperty Name="Choices" Relationship="CybersecurityModel.FK_Choices_ToQuestions" FromRole="Question" ToRole="Choice" />
+    <NavigationProperty Name="Category" Relationship="CybersecurityModel.FK_Questions_ToCategory" FromRole="Question" ToRole="Category" />
+  </EntityType>
+  <Association Name="FK_Answers_ToQuestions">
+    <End Type="CybersecurityModel.Question" Role="Question" Multiplicity="1" />
+    <End Type="CybersecurityModel.Answer" Role="Answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="QuestionId" />
+      </Principal>
+      <Dependent Role="Answer">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Choices_ToQuestions">
+    <End Type="CybersecurityModel.Question" Role="Question" Multiplicity="1" />
+    <End Type="CybersecurityModel.Choice" Role="Choice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="QuestionId" />
+      </Principal>
+      <Dependent Role="Choice">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Questions" Relationship="CybersecurityModel.FK_Questions_ToCategory" FromRole="Category" ToRole="Question" />
+    <NavigationProperty Name="Quizs" Relationship="CybersecurityModel.FK_Quiz_ToCategory" FromRole="Category" ToRole="Quiz" />
+    <NavigationProperty Name="Scores" Relationship="CybersecurityModel.FK_Score_ToCategory" FromRole="Category" ToRole="Score" />
+  </EntityType>
+  <Association Name="FK_Questions_ToCategory">
+    <End Type="CybersecurityModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="CybersecurityModel.Question" Role="Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quiz_ToCategory">
+    <End Type="CybersecurityModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="CybersecurityModel.Quiz" Role="Quiz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Quiz">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AchievementBadge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="achievementTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="achievementDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="achievementStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Hash" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FullName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Hash" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FullName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Scores" Relationship="CybersecurityModel.FK_Score_ToEmployee" FromRole="Employee" ToRole="Score" />
+  </EntityType>
+  <EntityType Name="Score">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="score1" Type="Int32" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Category" Relationship="CybersecurityModel.FK_Score_ToCategory" FromRole="Score" ToRole="Category" />
+    <NavigationProperty Name="Employee" Relationship="CybersecurityModel.FK_Score_ToEmployee" FromRole="Score" ToRole="Employee" />
+  </EntityType>
+  <Association Name="FK_Score_ToCategory">
+    <End Type="CybersecurityModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="CybersecurityModel.Score" Role="Score" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Score">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Score_ToEmployee">
+    <End Type="CybersecurityModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="CybersecurityModel.Score" Role="Score" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Score">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

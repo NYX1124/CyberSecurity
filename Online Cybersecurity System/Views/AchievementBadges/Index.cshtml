@@ -1,0 +1,34 @@
+﻿@model IEnumerable<AchievementBadge>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>@Model.Count() record(s)</p>
+<a href="Insert"><button class="btn btn-success btn-lg ms-2">+ New</button></a>
+<table class="table">
+    <tr>
+        <th>Acheivement Badge Id</th>
+        <th>Achievement Title</th>
+        <th>Achievement Description</th>
+        <th>Achievement Status</th>
+        <th>Created Date</th>
+        <th></th>
+    </tr>
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.id</td>
+            <td>@a.achievementTitle</td>
+            <td>@a.achievementDescription</td>
+            <td>@a.achievementStatus</td>
+            <td>@a.createDate </td>
+            @*<td><button data-get="/Quiz/Detail/@a.achievementBadgeId">Detail</button></td>*@
+        <td>
+            <a href="/AchievementBadges/UpdateAchievementBadge/@a.id"><button>Update</button></a>
+            <a href="/AchievementBadges/Delete/@a.id"><button>Delete</button></a>
+        </td>
+        </tr>
+    }
+</table>

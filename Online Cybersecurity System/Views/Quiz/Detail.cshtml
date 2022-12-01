@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>QuizDetail</h2>
+
+<table class="table detail">
+    <tr>
+        <th>Quiz Id</th>
+        <td>@Model.quizId</td>
+    </tr>
+    <tr>
+        <th>Question</th>
+        <td>@Model.description</td>
+    <tr>
+        <th>Choice A</th>
+        <td>@Model.choiceA</td>
+    </tr>
+    <tr>
+        <th>Choice B</th>
+        <td>@Model.choiceB</td>
+    </tr>
+    <tr>
+        <th>Choice C</th>
+        <td>@Model.choiceC</td>
+    </tr>
+    <tr>
+        <th>Choice D</th>
+        <td>@Model.choiceD</td>
+    </tr>
+    <tr>
+        <th>Correct Answer</th>
+        <td>@Model.correct_answer</td>
+    </tr>
+    <tr>
+        <th>Quiz Status</th>
+        <td>@Model.quizStatus</td>
+    </tr>
+    <tr>
+        <th>Created Date</th>
+        <td>@Model.createDate</td>
+    </tr>
+</table>
+
+<p>
+    <button data-get="/">Index</button>
+</p>

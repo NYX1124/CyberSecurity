@@ -1,0 +1,103 @@
+﻿@model QuizVM
+
+@{
+    ViewBag.Title = "UpdateQuiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" class="form-horizontal">
+    @*@Html.AntiForgeryToken()*@
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="row register-form">
+                            @Html.ValidationSummary(true)
+                            <div class="col-md-12">
+                                <div class="col-sm-12">
+                                    <div class="form-group  mb-4">
+                                        @Html.LabelFor(q => q.id, new { @class = "control-label col-sm-4" })
+                                        @Html.DisplayFor(q => q.id, new { data_upper = "" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(q => q.description, new { @class = "control-label col-sm-4" })
+                                        @Html.TextAreaFor(q => q.description, new { data_upper = "" })
+                                        @Html.ValidationMessageFor(q => q.description)
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(q => q.difficulty, new { @class = "control-label col-sm-4" })
+                                        <label>@Html.RadioButtonFor(q => q.difficulty, "Easy") Level 1</label>
+                                        <label>@Html.RadioButtonFor(q => q.difficulty, "Intermediate") Level 2</label>
+                                        <label>@Html.RadioButtonFor(q => q.difficulty, "Hard") Level 3</label>
+                                        @Html.ValidationMessageFor(q => q.difficulty)
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(q => q.choiceA, new { @class = "control-label col-sm-4" })
+                                        @Html.TextAreaFor(q => q.choiceA, new { data_upper = "" })
+                                        @Html.ValidationMessageFor(q => q.choiceA)
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(q => q.choiceB, new { @class = "control-label col-sm-4" })
+                                        @Html.TextAreaFor(q => q.choiceB, new { data_upper = "" })
+                                        @Html.ValidationMessageFor(q => q.choiceB)
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(q => q.choiceC, new { @class = "control-label col-sm-4" })
+                                        @Html.TextAreaFor(q => q.choiceC, new { data_upper = "" })
+                                        @Html.ValidationMessageFor(q => q.choiceC)
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(q => q.choiceD, new { @class = "control-label col-sm-4" })
+                                        @Html.TextAreaFor(q => q.choiceD, new { data_upper = "" })
+                                        @Html.ValidationMessageFor(q => q.choiceD)
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(q => q.correct_answer, new { @class = "control-label col-sm-4" })
+                                        @Html.TextAreaFor(q => q.correct_answer, new { data_upper = "" })
+                                        @Html.ValidationMessageFor(q => q.correct_answer)
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(q => q.quizStatus, new { @class = "control-label col-sm-4" })
+                                        <label>@Html.RadioButtonFor(q => q.quizStatus, 1) Active</label>
+                                        <label>@Html.RadioButtonFor(q => q.quizStatus, 2) Inactive</label>
+                                        @Html.ValidationMessageFor(q => q.quizStatus)
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(q => q.createDate, new { @class = "control-label col-sm-4" })
+                                        @Html.TextBoxFor(q => q.createDate, new { data_upper = "", @Value = DateTime.Now.ToShortDateString() })
+                                        @Html.ValidationMessageFor(q => q.createDate)
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end pt-3">
+                                    <button class="btn btn-warning btn-lg ms-2">Back</button>
+                                    <button type="reset" class="btn btn-light btn-lg">Reset all</button>
+                                    <button class="btn btn-warning btn-lg ms-2">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,120 @@
+﻿@model IQueryable<Online_Cybersecurity_System.Models.QuizVM>
+
+@{ int count = 1, countR = 0;}
+
+
+<div class="Quiz">
+
+    <h4 style="margin-top: 4%;"> <span class="label label-info">Questions :</span> </h4>
+
+    @if (Model != null && Model.Any())
+    {
+
+        foreach (var q in Model)
+        {
+<div class="BlockQ" style="border: 1px solid #bdbdbd; width: 75%; border-radius: 4px; margin-top: 40px; background-color: #f0ffff; padding: 8px;">
+
+    <div class="Question" style="padding: 2%;">
+        <span class="label label-warning"> @string.Format("{0}{1}.", "Q", count)</span>
+        <span id="@string.Format("{0}{1}", "ID_Q", count)" style="display:none;">@q.id</span>
+        <p style="display: inline; padding: 2%;" id="@string.Format("{0}{1}", "Q", count)">@q.description</p>
+    </div>
+
+    <div class="Choices" style="margin-left: 8%;">
+
+
+        <label class="radio-inline">
+            <input type="radio" name="@string.Format("{0}{1}", "inlineRadioOptions",count)" id="@string.Format("{0}{1}", "inlineRadio", countR)" value="@q.choiceA" style="margin-left: -16px;"> @q.choiceA
+            <input type="radio" name="@string.Format("{0}{1}", "inlineRadioOptions",count)" id="@string.Format("{0}{1}", "inlineRadio", countR)" value="@q.choiceB" style="margin-left: -16px;"> @q.choiceB
+            <input type="radio" name="@string.Format("{0}{1}", "inlineRadioOptions",count)" id="@string.Format("{0}{1}", "inlineRadio", countR)" value="@q.choiceC" style="margin-left: -16px;"> @q.choiceC
+            <input type="radio" name="@string.Format("{0}{1}", "inlineRadioOptions",count)" id="@string.Format("{0}{1}", "inlineRadio", countR)" value="@q.choiceD" style="margin-left: -16px;"> @q.choiceD
+        </label><br />
+
+
+    </div> <!--END Choices-->
+
+    <div id="@string.Format("{0}{1}{2}", "Ans","Q", count)">
+
+
+    </div>
+
+</div> <!-- END BlockQ --> count++;
+}
+<span id="countQuections" style="display:none;">@count</span>
+                <button type="button" id="SubmitQuiz" class="btn btn-default" style="margin-top: 10px;"><span class="glyphicon glyphicon-ok"></span>   Submit Quiz </button>}
+
+</div> <!-- END QUIZ -->
+
+@section MyScritps
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#SubmitQuiz').on('click', function () {
+
+                //count Questions
+                var sel = $('#countQuestions').text();
+
+                console.log(sel);
+
+                var resultQuiz = [], countQuestion = parseInt(sel), quiz = {}, j = 1;
+
+                for (var i = 1; i < countQuestion; i++) {
+                    quiz = {
+                        Id: $('#ID_Q'+ i).text(),
+                        description: $('#Q' + i).text(),
+                        AnswerQ: $('input[name=inlineRadioOptions' + i + ']:checked').val()
+                    }
+
+                    resultQuiz.push(quiz);
+                }
+
+                $.ajax({
+
+                    type: 'POST',
+                    url: '@Url.Action("Exam", "Home2")',
+                    data: { resultQuiz },
+
+                    success: function (response) {
+
+                        if (response.result.length > 0)
+                        {
+                            for(var i = 0; i <response.result.length; i++ )
+                            {
+                                if(response.result[i].isCorrect == true)
+                                {
+
+                                    $('#AnsQ' + j).html('<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Correct answer</div>');
+                                }
+                                else
+                                {
+                                    $('#AnsQ' + j).html('<div class="alert alert-danger" role="alert"> <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Incorrect answer - The Good Answer is <b>' + response.result[i].AnswerQ + '</b></div>');
+                                }
+                                j++;
+                            }
+                        }
+                        else
+                        {
+                            alert("Something Wrong");
+                        }
+
+
+                        //console.log(response.result.length);
+
+                    },
+                    error: function (response) {
+
+                    }
+                });
+
+                console.log(resultQuiz);
+
+            });
+
+
+
+        });
+
+    </script>
+}

@@ -1,0 +1,50 @@
+﻿@model Online_Cybersecurity_System.Models.Answer
+@{
+    ViewBag.Title = "Delete Question";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+            <div class="card card-registration my-4">
+                <div class="row g-0">
+                    <div class="row register-form">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="col-sm-12">
+                                <div class="form-group  mb-4">
+                                    @Html.LabelFor(q => q.AnswerId, new { @class = "control-label col-sm-4" })
+                                    @Html.DisplayFor(q => q.AnswerId, new { data_upper = "" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(q => q.AnswerText, new { @class = "control-label col-sm-4" })
+                                    @Html.DisplayFor(q => q.AnswerText, new { data_upper = "" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(q => q.Question.QuestionText, new { @class = "control-label col-sm-4" })
+                                    @Html.DisplayFor(q => q.Question.QuestionText, new { data_upper = "" })
+                                </div>
+                            </div>
+
+                            @using (Html.BeginForm())
+                            {
+                                <div class="d-flex justify-content-end pt-3">
+                                    <button class="btn btn-warning btn-lg ms-2" onclick="history.go(-1); return false;">Back</button>
+                                    <button type="reset" class="btn btn-light btn-lg">Reset all</button>
+                                    <input type="submit" value="Delete" class="btn btn-default" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Story>
+
+@{
+     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manage Story</h2>
+
+<p>@Model.Count() record(s)</p>
+
+<a href="/Story/InsertStory"><button class="btn btn-success btn-lg ms-2">+ New</button></a>
+
+<table class="table">
+     <tr>
+          <th>Id</th>
+          <th>Story</th>
+          <th>Story Description</th>
+          <th>Source</th>
+          <th>Story Status</th>
+          <th>Created Date</th>
+     </tr>
+     @foreach (var s in Model)
+     {
+          <tr>
+               <td>@s.id</td>
+               <td>@s.name</td>
+               <td>@s.description</td>
+               <td>@s.src</td>
+               <td>@s.storyStatus</td>
+               <td>@s.createDate</td>
+               <td>
+                    <a href="/Story/Detail/@s.id"><button>Detail</button></a>
+                    <a href="/Story/UpdateStory/@s.id"><button>Update</button></a>
+                    <a href="/Story/Delete/@s.id"><button>Delete</button></a>
+               </td>
+          </tr>
+     }
+</table>
