@@ -61,6 +61,7 @@ namespace QuizGamification.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
+
             CategoryVM quizSelected = Session["SelectedQuiz"] as CategoryVM;
             IQueryable<QuestionVM> questions = null;
 
@@ -85,7 +86,7 @@ namespace QuizGamification.Controllers
         [HttpPost]
         public ActionResult QuizTest(List<QuizAnswersVM> resultQuiz)
         {
-           List<QuizAnswersVM> finalResultQuiz = new List<QuizAnswersVM>();
+            List<QuizAnswersVM> finalResultQuiz = new List<QuizAnswersVM>();
 
             foreach (QuizAnswersVM answser in resultQuiz)
             {
@@ -103,12 +104,37 @@ namespace QuizGamification.Controllers
             return Json(new { result = finalResultQuiz }, JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpPost]
-        //public JsonResult QuizTest(int countCorrect)
-        //{
-        //    var result = countCorrect;
-        //    var response = new { result = result };
-        //    return Json(response, JsonRequestBehavior.AllowGet);
-        //}
+        [HttpPost]
+        public ActionResult Score(int countCorrect, ScoreVM model)
+        {
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            if (ModelState.IsValid)
+            {
+                using (CybersecurityEntities db = new CybersecurityEntities())
+                {
+                    Score s = new Score();
+                    s.id = model.id;
+                    s.username = Session["Username"].ToString();
+                    s.score1 = countCorrect;
+                    s.CategoryId = model.CategoryId;
+                    s.createDate = DateTime.Now;
+
+                    db.Scores.Add(s);
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                return View("SelectQuizz", model);
+            }
+
+            var result = countCorrect;
+            var response = new { result = result };
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

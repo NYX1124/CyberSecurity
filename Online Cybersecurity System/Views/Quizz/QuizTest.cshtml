@@ -2,7 +2,7 @@
 
 @{ int count = 1, countR = 0;
     Layout = "~/Views/Shared/_LayoutPage3.cshtml";
-    }
+}
 
 
 <div class="container">
@@ -20,34 +20,36 @@
 
             foreach (var question in Model)
             {
-<div class="BlockQ" style="border: 1px solid #bdbdbd; width: 75%; border-radius: 4px; margin-top: 40px; background-color: #f0ffff; padding: 8px;">
+                <div class="BlockQ" style="border: 1px solid #bdbdbd; width: 75%; border-radius: 4px; margin-top: 40px; background-color: #f0ffff; padding: 8px;">
+                    <div class="Question" style="padding: 2%;">
+                        <span class="label label-warning">@Session["SelectedQuiz"]</span>
+                        <span class="label label-warning"> @string.Format("{0}{1}.", "Q", count)</span>
+                        <span id="@string.Format("{0}{1}", "ID_Q", count)" style="display:none;">@question.QuestionId</span>
+                        <p style="display: inline; padding: 2%;" id="@string.Format("{0}{1}", "Q", count)">@question.QuestionText</p>
+                    </div>
 
-    <div class="Question" style="padding: 2%;">
-        <span class="label label-warning"> @string.Format("{0}{1}.", "Q", count)</span>
-        <span id="@string.Format("{0}{1}", "ID_Q", count)" style="display:none;">@question.QuestionId</span>
-        <p style="display: inline; padding: 2%;" id="@string.Format("{0}{1}", "Q", count)">@question.QuestionText</p>
-    </div>
+                    <div class="Choices" style="margin-left: 8%;">
 
-    <div class="Choices" style="margin-left: 8%;">
+                        @foreach (var choice in question.Choices)
+                        {
+                            <label class="radio-inline">
+                                <input type="radio" name="@string.Format("{0}{1}", "inlineRadioOptions", count)" id="@string.Format("{0}{1}", "inlineRadio", countR)" value="@choice.ChoiceText" style="margin-left: -16px;"> @choice.ChoiceText
+                            </label><br />countR++;
+                        }
 
-        @foreach (var choice in question.Choices)
-        {
-<label class="radio-inline">
-    <input type="radio" name="@string.Format("{0}{1}", "inlineRadioOptions",count)" id="@string.Format("{0}{1}", "inlineRadio", countR)" value="@choice.ChoiceText" style="margin-left: -16px;"> @choice.ChoiceText
-</label><br />countR++;
-                    }
+                    </div> <!--END Choices-->
 
-    </div> <!--END Choices-->
-
-    <div id="@string.Format("{0}{1}{2}", "Ans","Q", count)">
+                    <div id="@string.Format("{0}{1}{2}", "Ans", "Q", count)">
 
 
-    </div>
+                    </div>
 
-</div> <!-- END BlockQ --> count++;
-                }
-<span id="countQuestions" style="display:none;">@count</span>
-                <button type="button" id="SubmitQuiz" class="btn btn-default" style="margin-top: 10px;"><span class="glyphicon glyphicon-ok"></span>   Submit Quiz </button>}
+                </div> <!-- END BlockQ --> count++;
+            }
+            <span id="countQuestions" style="display:none;">@count</span>
+            <button type="button" id="CheckAns" class="btn btn-default" style="margin-top: 10px;"><span class="glyphicon glyphicon-ok"></span>   Check Answer </button>
+            <button type="button" id="SubmitQuiz" class="btn btn-default" style="margin-top: 10px;"><span class="glyphicon glyphicon-ok"></span>   Submit Quiz </button>
+        }
 
     </div> <!-- END QUIZ -->
 
@@ -61,8 +63,9 @@
         var countCorrect = 0, totalQuestion = 0;
 
         $(document).ready(function () {
-            $('#SubmitQuiz').on('click', function () {
-                
+            $('#CheckAns').on('click', function () {
+                $("input[type=radio]").attr('disabled', true);
+
                 //count Questions
                 var sel = $('#countQuestions').text();
 
@@ -74,6 +77,7 @@
                     question = {
                         QuestionId: $('#ID_Q'+ i).text(),
                         QuestionText: $('#Q' + i).text(),
+                        CategoryId: $('#CAT_Q' + i).text(),
                         AnswerQ: $('input[name=inlineRadioOptions' + i + ']:checked').val()
                     }
 
@@ -129,6 +133,24 @@
 
 
         });
+
+        $(document).ready(function () {
+            $('#SubmitQuiz').on('click', function () {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Score", "Quizz")',
+                    data: { countCorrect },
+                    success: function (response) {
+
+                    },
+                    error: function () {
+
+                    }
+
+                });
+            });
+         });
     </script>
 }
 

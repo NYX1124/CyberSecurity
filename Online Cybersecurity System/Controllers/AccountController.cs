@@ -128,6 +128,7 @@ namespace Online_Cybersecurity_System.Controllers
                     SignIn(employee.Username, employee.Hash, model.RememberMe);
                     Session["Image"] = employee.Image;
                     Session["Login"] = true;
+                    Session["Username"] = employee.Username;
 
                     // TODO: Handle return URL
                     if (returnURL == "")
@@ -148,6 +149,7 @@ namespace Online_Cybersecurity_System.Controllers
                         SignIn(admin.Username, admin.Hash, model.RememberMe);
                         Session["Image"] = admin.Image;
                         Session["Login"] = true;
+                        Session["Username"] = admin.Username;
 
                         // TODO: Handle return URL
                         if (returnURL == "")
@@ -170,8 +172,9 @@ namespace Online_Cybersecurity_System.Controllers
         {
             // TODO: Sign out user + session
             SignOut();
-            Session.Remove("Image");
-            Session.Remove("Login");
+            //Session.Remove("Image");
+            //Session.Remove("Login");
+            Session.Abandon();
             return RedirectToAction("AdminRegister", "Account");
         }
 
